@@ -1,10 +1,12 @@
+
 import React, { useState } from "react";
 
 const FormValidations = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -42,6 +44,13 @@ const FormValidations = () => {
       newErrors.password = "Password must be at least 6 characters";
     }
 
+    // Confirm Password validation
+    if (!form.confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password is required";
+    } else if (form.password !== form.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
     return newErrors;
   };
 
@@ -51,9 +60,11 @@ const FormValidations = () => {
 
     const validationErrors = validate();
 
-    if (validationErrors.length === 0) {
-      //console.log("Form Submitted:", form);
+    // Object is empty means there are no errors
+    if (Object.keys(validationErrors).length === 0) {
+      console.log("Form Submitted:", form);
       alert("Form submitted successfully!");
+      setErrors({});
     } else {
       setErrors(validationErrors);
     }
@@ -61,6 +72,7 @@ const FormValidations = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Name */}
       <div>
         <input
           type="text"
@@ -69,9 +81,13 @@ const FormValidations = () => {
           value={form.name}
           onChange={handleChange}
         />
-        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
+
+        {errors.name && (
+          <p style={{ color: "red" }}>{errors.name}</p>
+        )}
       </div>
 
+      {/* Email */}
       <div>
         <input
           type="text"
@@ -80,9 +96,13 @@ const FormValidations = () => {
           value={form.email}
           onChange={handleChange}
         />
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+
+        {errors.email && (
+          <p style={{ color: "red" }}>{errors.email}</p>
+        )}
       </div>
 
+      {/* Password */}
       <div>
         <input
           type="password"
@@ -91,7 +111,25 @@ const FormValidations = () => {
           value={form.password}
           onChange={handleChange}
         />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+
+        {errors.password && (
+          <p style={{ color: "red" }}>{errors.password}</p>
+        )}
+      </div>
+
+      {/* Confirm Password */}
+      <div>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={form.confirmPassword}
+          onChange={handleChange}
+        />
+
+        {errors.confirmPassword && (
+          <p style={{ color: "red" }}>{errors.confirmPassword}</p>
+        )}
       </div>
 
       <button type="submit">Submit</button>
