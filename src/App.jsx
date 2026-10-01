@@ -83,7 +83,7 @@ function App() {
     {/* <AppContent />*/}
     {/* {state?.isLoggedIn ? <Login />: <SearchAPI />} */}
     {/* </Provider>*/}
-    {/* <StopWatch /> */}
+    <StopWatch />
     {/* <TypeWriter /> */}
     {/* <CharacterCount /> */}
     {/* <NestedCircle /> */}
@@ -91,7 +91,7 @@ function App() {
     {/* <AutoTypeHead /> */}
     {/* <ProgressbarValidation /> */}
     {/* <Captcha /> */}
-    <TableNumbers />
+    {/* <TableNumbers /> */}
     {/* <VirtualList /> */}
     </>
   )
